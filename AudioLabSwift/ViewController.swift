@@ -34,13 +34,13 @@ class ViewController: UIViewController {
                         numPointsInGraph: AUDIO_BUFFER_SIZE/2)
         
         graph?.addGraph(withName: "time",
-            shouldNormalize: false,
-            numPointsInGraph: AUDIO_BUFFER_SIZE)
+                        shouldNormalize: false,
+                        numPointsInGraph: AUDIO_BUFFER_SIZE)
         
         //A dding the music equalizer graph
         graph?.addGraph(withName: "musical",
-            shouldNormalize: false,
-            numPointsInGraph: MUSICAL_EQUALIZER_SIZE)
+                        shouldNormalize: true,
+                        numPointsInGraph: MUSICAL_EQUALIZER_SIZE)
         
         // just start up the audio model here
         audio.startMicrophoneProcessing(withFps: 10)

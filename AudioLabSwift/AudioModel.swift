@@ -86,11 +86,10 @@ class AudioModel {
     // Christian: Max Frequency implementation with vDSP_vswmax
     func getMaxFrequencyMagnitudeArray() -> Array<Float>{
         
-        let strideAndWindowLength = BUFFER_SIZE / 20
-        let windowLength = vDSP_Length(strideAndWindowLength)
+        let windowLength = vDSP_Length(fftData.count / 20)
         let outputCount = vDSP_Length(musicData.count)
-        let stride = vDSP_Stride(strideAndWindowLength)
-        vDSP_vswmax(fftData, stride, &musicData, 1, outputCount, windowLength)
+        let stride = vDSP_Stride(1)
+        vDSP_vswmax(fftData, stride, &musicData, stride, outputCount, windowLength)
         return musicData
     }
     //==========================================
@@ -144,6 +143,8 @@ class AudioModel {
             fftHelper!.performForwardFFT(withData: &timeData,
                                          andCopydBMagnitudeToBuffer: &fftData)
             
+            // Christian: Update the musical one
+            musicData = getMaxFrequencyMagnitudeArray()
             
         }
     }
