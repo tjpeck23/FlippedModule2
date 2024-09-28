@@ -12,6 +12,8 @@ import Metal
 
 let AUDIO_BUFFER_SIZE = 1024*4
 
+let MUSICAL_EQUALIZER_SIZE = 20
+
 
 class ViewController: UIViewController {
 
@@ -35,6 +37,11 @@ class ViewController: UIViewController {
             shouldNormalize: false,
             numPointsInGraph: AUDIO_BUFFER_SIZE)
         
+        //A dding the music equalizer graph
+        graph?.addGraph(withName: "musical equalizer",
+            shouldNormalize: false,
+            numPointsInGraph: MUSICAL_EQUALIZER_SIZE)
+        
         // just start up the audio model here
         audio.startMicrophoneProcessing(withFps: 10)
         //audio.startProcesingAudioFileForPlayback()
@@ -49,6 +56,11 @@ class ViewController: UIViewController {
        
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        audio.pause()
+    }
     
     @objc
     func updateGraph(){
@@ -61,6 +73,8 @@ class ViewController: UIViewController {
             data: self.audio.timeData,
             forKey: "time"
         )
+        
+        // Need to update for the music equalizer
         
     }
     

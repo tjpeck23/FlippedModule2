@@ -15,6 +15,8 @@ class AudioModel {
     private var BUFFER_SIZE:Int
     var timeData:[Float]
     var fftData:[Float]
+    // Christian: Added the array of size 20 for the Music Equalizer
+    var musicData:[Float]
     
     // MARK: Public Methods
     init(buffer_size:Int) {
@@ -22,6 +24,8 @@ class AudioModel {
         // anything not lazily instatntiated should be allocated here
         timeData = Array.init(repeating: 0.0, count: BUFFER_SIZE)
         fftData = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
+        // This is where the size of the array is decided.
+        musicData = Array.init(repeating: 0.0, count: 20)
     }
     
     // public function for starting processing of microphone data
@@ -53,6 +57,10 @@ class AudioModel {
     // You must call this when you want the audio to start being handled by our model
     func play(){
         self.audioManager?.play()
+    }
+    
+    func pause(){
+        self.audioManager?.pause()
     }
     
     // Here is an example function for getting the maximum frequency
