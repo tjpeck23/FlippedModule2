@@ -32,16 +32,25 @@ class TableViewController: UITableViewController {
         return 1
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+        cell.textLabel?.text = "To View Controller"
         // Configure the cell...
 
         return cell
     }
-    */
-
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "ShowDetailSegue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowDetailSegue" {
+            let destinationVC = segue.destination as! ViewController
+        }
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
