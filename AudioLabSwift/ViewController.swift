@@ -43,8 +43,8 @@ class ViewController: UIViewController {
                         numPointsInGraph: MUSICAL_EQUALIZER_SIZE)
         
         // just start up the audio model here
-        audio.startMicrophoneProcessing(withFps: 10)
-        //audio.startProcesingAudioFileForPlayback()
+        //audio.startMicrophoneProcessing(withFps: 10)
+        audio.startProcesingAudioFileForPlayback()
         audio.startProcessingSinewaveForPlayback(withFreq: 630.0)
         audio.play()
         

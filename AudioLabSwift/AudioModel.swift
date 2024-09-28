@@ -28,22 +28,51 @@ class AudioModel {
         musicData = Array.init(repeating: 0.0, count: 20)
     }
     
+    
     // public function for starting processing of microphone data
-    func startMicrophoneProcessing(withFps:Double){
-        self.audioManager?.inputBlock = self.handleMicrophone
+    /*func startMicrophoneProcessing(withFps:Double){
+        //self.audioManager?.inputBlock = self.handleMicrophone
         
         // repeat this fps times per second using the timer class
         Timer.scheduledTimer(timeInterval: 1.0/withFps, target: self,
                             selector: #selector(self.runEveryInterval),
                             userInfo: nil,
                             repeats: true)
-    }
+    }*/
+    
     
     // public function for playing from a file reader file
     func startProcesingAudioFileForPlayback(){
-        self.audioManager?.outputBlock = self.handleSpeakerQueryWithAudioFile
-        self.fileReader?.play()
+        guard let audioManager = self.audioManager else {
+                print("AudioManager is not initialized")
+                return
+            }
+            
+            guard let fileReader = self.fileReader else {
+                print("FileReader is not initialized")
+                return
+            }
+        
+        // Set the output block for speaker
+        audioManager.outputBlock = self.handleSpeakerQueryWithAudioFile
+            
+        // Play the audio file
+        fileReader.play()
+        print("Audio playback started")
     }
+    
+    //adding this to allow the equalizer to start with music and not microphone
+    func startEqualizerWithAudioFile() {
+        // Start processing the audio file
+        startProcesingAudioFileForPlayback()
+        
+        // Start updating the equalizer at 60fps
+        Timer.scheduledTimer(timeInterval: 1.0/60.0, target: self,
+                             selector: #selector(runEveryInterval),
+                             userInfo: nil,
+                             repeats: true)
+    }
+
     
     func startProcessingSinewaveForPlayback(withFreq:Float=330.0){
         sineFrequency = withFreq
@@ -55,7 +84,7 @@ class AudioModel {
     }
     
     // You must call this when you want the audio to start being handled by our model
-    func play(){
+    func play() {
         self.audioManager?.play()
     }
     
@@ -134,20 +163,26 @@ class AudioModel {
     //==========================================
     // MARK: Model Callback Methods
     @objc
-    private func runEveryInterval(){
-        if inputBuffer != nil {
-            // copy data to swift array
-            self.inputBuffer!.fetchFreshData(&timeData, withNumSamples: Int64(BUFFER_SIZE))
-            
-            // now take FFT and display it
-            fftHelper!.performForwardFFT(withData: &timeData,
-                                         andCopydBMagnitudeToBuffer: &fftData)
-            
-            // Christian: Update the musical one
-            musicData = getMaxFrequencyMagnitudeArray()
-            
+    private func runEveryInterval() {
+        if outputBuffer != nil {
+                // Fetch audio data from the output buffer
+                self.outputBuffer!.fetchFreshData(&timeData, withNumSamples: Int64(BUFFER_SIZE))
+
+                // Perform FFT and update the equalizer
+                fftHelper!.performForwardFFT(withData: &timeData, andCopydBMagnitudeToBuffer: &fftData)
+                musicData = getMaxFrequencyMagnitudeArray()
+                updateEqualizerVisualization(musicData)
         }
     }
+    
+    //updates equalizer to current music data
+    func updateEqualizerVisualization(_ data: [Float]) {
+        for i in 0..<data.count {
+            print("Equalizer Band \(i): Amplitude \(data[i])")
+            // Update the UI for each frequency band here
+        }
+    }
+    
     
    
     
@@ -155,7 +190,8 @@ class AudioModel {
     // MARK: Audiocard Callbacks
     // in obj-C it was (^InputBlock)(float *data, UInt32 numFrames, UInt32 numChannels)
     // and in swift this translates to:
-    private func handleMicrophone (data:Optional<UnsafeMutablePointer<Float>>, numFrames:UInt32, numChannels: UInt32) {
+    
+    /*private func handleMicrophone (data:Optional<UnsafeMutablePointer<Float>>, numFrames:UInt32, numChannels: UInt32) {
 //        var max:Float = 0.0
 //        if let arrayData = data{
 //            for i in 0..<Int(numFrames){
@@ -169,9 +205,10 @@ class AudioModel {
         
         // copy samples from the microphone into circular buffer
         self.inputBuffer?.addNewFloatData(data, withNumSamples: Int64(numFrames))
-    }
+    }*/
     
     private func handleSpeakerQueryWithAudioFile(data:Optional<UnsafeMutablePointer<Float>>, numFrames:UInt32, numChannels: UInt32){
+        guard let file = self.fileReader else { return }
         if let file = self.fileReader{
             
             // read from file, loaidng into data (a float pointer)
@@ -180,8 +217,7 @@ class AudioModel {
                                     numChannels: numChannels)
             
             // set samples to output speaker buffer
-            self.outputBuffer?.addNewFloatData(data,
-                                         withNumSamples: Int64(numFrames))
+            self.outputBuffer?.addNewFloatData(data, withNumSamples: Int64(numFrames))
         }
     }
     
