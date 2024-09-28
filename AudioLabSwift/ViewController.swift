@@ -13,7 +13,7 @@ import Metal
 let AUDIO_BUFFER_SIZE = 1024*4
 
 
-class TableViewController: UITableViewController {
+class ViewController: UIViewController {
 
     
     let audio = AudioModel(buffer_size: AUDIO_BUFFER_SIZE)
