@@ -83,6 +83,16 @@ class AudioModel {
     }
     // for sliding max windows, you might be interested in the following: vDSP_vswmax
     
+    // Christian: Max Frequency implementation with vDSP_vswmax
+    func getMaxFrequencyMagnitudeArray() -> Array<Float>{
+        
+        let strideAndWindowLength = BUFFER_SIZE / 20
+        let windowLength = vDSP_Length(strideAndWindowLength)
+        let outputCount = vDSP_Length(musicData.count)
+        let stride = vDSP_Stride(strideAndWindowLength)
+        vDSP_vswmax(fftData, stride, &musicData, 1, outputCount, windowLength)
+        return musicData
+    }
     //==========================================
     // MARK: Private Properties
     private lazy var audioManager:Novocaine? = {

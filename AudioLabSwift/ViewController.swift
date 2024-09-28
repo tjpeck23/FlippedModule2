@@ -38,7 +38,7 @@ class ViewController: UIViewController {
             numPointsInGraph: AUDIO_BUFFER_SIZE)
         
         //A dding the music equalizer graph
-        graph?.addGraph(withName: "musical equalizer",
+        graph?.addGraph(withName: "musical",
             shouldNormalize: false,
             numPointsInGraph: MUSICAL_EQUALIZER_SIZE)
         
@@ -76,6 +76,9 @@ class ViewController: UIViewController {
         
         // Need to update for the music equalizer
         
+        self.graph?.updateGraph(
+            data: self.audio.musicData,
+            forKey: "musical")
     }
     
     
