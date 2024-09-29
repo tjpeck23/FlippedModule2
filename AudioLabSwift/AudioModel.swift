@@ -30,7 +30,7 @@ class AudioModel {
     
     
     // public function for starting processing of microphone data
-    /*func startMicrophoneProcessing(withFps:Double){
+    func startMicrophoneProcessing(withFps:Double){
         //self.audioManager?.inputBlock = self.handleMicrophone
         
         // repeat this fps times per second using the timer class
@@ -38,7 +38,7 @@ class AudioModel {
                             selector: #selector(self.runEveryInterval),
                             userInfo: nil,
                             repeats: true)
-    }*/
+    }
     
     
     // public function for playing from a file reader file
@@ -191,7 +191,7 @@ class AudioModel {
     // in obj-C it was (^InputBlock)(float *data, UInt32 numFrames, UInt32 numChannels)
     // and in swift this translates to:
     
-    /*private func handleMicrophone (data:Optional<UnsafeMutablePointer<Float>>, numFrames:UInt32, numChannels: UInt32) {
+    private func handleMicrophone (data:Optional<UnsafeMutablePointer<Float>>, numFrames:UInt32, numChannels: UInt32) {
 //        var max:Float = 0.0
 //        if let arrayData = data{
 //            for i in 0..<Int(numFrames){
@@ -205,7 +205,7 @@ class AudioModel {
         
         // copy samples from the microphone into circular buffer
         self.inputBuffer?.addNewFloatData(data, withNumSamples: Int64(numFrames))
-    }*/
+    }
     
     private func handleSpeakerQueryWithAudioFile(data:Optional<UnsafeMutablePointer<Float>>, numFrames:UInt32, numChannels: UInt32){
         guard let file = self.fileReader else { return }
