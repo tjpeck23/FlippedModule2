@@ -15,7 +15,7 @@ import Metal
 let AUDIO_BUFFER_SIZE = 1024*8 //comment
 
 
-let MUSICAL_EQUALIZER_SIZE = 57
+let MUSICAL_EQUALIZER_SIZE = 64
 
 
 class ModuleAViewController: UIViewController {
