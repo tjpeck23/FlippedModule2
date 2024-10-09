@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="22Z-c2-FsN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BkU-9l-gvA">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,70 +9,67 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
-        <scene sceneID="zRL-yG-V32">
-            <objects>
-                <tableViewController id="22Z-c2-FsN" customClass="TableViewController" customModule="AudioLabSwift" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="rtw-hQ-8ut">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="Mcd-Oc-dIx">
-                                <rect key="frame" x="0.0" y="50" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mcd-Oc-dIx" id="Vc6-1K-TwX">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="RJZ-Li-xJO" kind="showDetail" identifier="ShowDetailSegue" id="rx4-X2-KwF"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="22Z-c2-FsN" id="mI3-ks-z9p"/>
-                            <outlet property="delegate" destination="22Z-c2-FsN" id="4Lx-Mz-1Ww"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="TM4-W9-kKF"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nMq-3q-5bD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-743.47826086956525" y="332.8125"/>
-        </scene>
-        <!--View Controller-->
+        <!--ModuleA View Controller-->
         <scene sceneID="Y0O-By-dt4">
             <objects>
-                <viewController id="RJZ-Li-xJO" customClass="ViewController" customModule="AudioLabSwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="RJZ-Li-xJO" customClass="ModuleAViewController" customModule="AudioLabSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="boW-G7-00w">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="azK-iq-Quy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="8NJ-GH-Wtd"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r5l-tL-oiy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-743" y="1037"/>
+            <point key="canvasLocation" x="166.66666666666669" y="1036.6071428571429"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="wZb-Dc-DEH">
+            <objects>
+                <viewController id="BkU-9l-gvA" customClass="MainViewController" customModule="AudioLabSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ucR-So-PvS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ama-XB-P4w">
+                                <rect key="frame" x="159" y="244" width="97" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Module A"/>
+                                <connections>
+                                    <action selector="ModuleAButton:" destination="BkU-9l-gvA" eventType="touchUpInside" id="lCm-ew-Jz0"/>
+                                    <segue destination="RJZ-Li-xJO" kind="show" id="gam-6l-e9k"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="RwH-Qp-haZ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="45Z-bv-ubf"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Dp-yc-onm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-744.92753623188412" y="1036.6071428571429"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="bWq-da-uEK">
+        <scene sceneID="zcN-MN-6sD">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DrD-hc-1xK" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="G5L-M9-Sz1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5cs-Bg-zcY">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Z8x-a5-6c0">
                         <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="22Z-c2-FsN" kind="relationship" relationship="rootViewController" id="jbB-Aj-2pf"/>
+                        <segue destination="BkU-9l-gvA" kind="relationship" relationship="rootViewController" id="CUK-ZM-uiO"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Vxd-2J-7oN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Vn-wG-5mS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1653.6231884057972" y="332.8125"/>
+            <point key="canvasLocation" x="-1655.072463768116" y="1036.6071428571429"/>
         </scene>
     </scenes>
     <resources>
