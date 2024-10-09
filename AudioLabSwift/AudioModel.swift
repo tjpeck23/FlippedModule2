@@ -64,7 +64,7 @@ class AudioModel {
     }
     
     // Here is an example function for getting the maximum frequency
-    func getMaxFrequencyMagnitude() -> (Float,Float){
+    /*func getMaxFrequencyMagnitude() -> (Float,Float){
         // this is the slow way of getting the maximum...
         // you might look into the Accelerate framework to make things more efficient
         var max:Float = -1000.0
@@ -80,7 +80,35 @@ class AudioModel {
         }
         let frequency = Float(maxi) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)
         return (max,frequency)
+    }*/
+    
+    func getMaxFrequencyMagnitude() /*-> (Float,Float)*/{
+        // this is the slow way of getting the maximum...
+        // you might look into the Accelerate framework to make things more efficient
+        var max:Float = -1000.0
+        var maxi:Int = 0
+        
+        if inputBuffer != nil {
+            for i in 0..<Int(self.musicData.count){
+                if(self.musicData[i]>max){
+                    for j in 0..<Int(fftData.count){
+                        if(fftData[j] == self.musicData[i]){
+                            max = fftData[j]
+                            maxi = j
+                            break
+                        }
+                    }
+                }
+            }
+        }
+        let frequency = Float(maxi) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)
+        //delete later
+        dump(frequency)
+        //need to edit to return 2 max frequencies
+        //return (max,frequency)
     }
+    
+    
     // for sliding max windows, you might be interested in the following: vDSP_vswmax
     
     // Christian: Max Frequency implementation with vDSP_vswmax
@@ -145,6 +173,9 @@ class AudioModel {
             
             // Christian: Update the musical one
             musicData = getMaxFrequencyMagnitudeArray()
+            
+            // Will delete later
+            getMaxFrequencyMagnitude()
             
         }
     }
