@@ -25,7 +25,7 @@ class AudioModel {
         timeData = Array.init(repeating: 0.0, count: BUFFER_SIZE)
         fftData = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
         // This is where the size of the array is decided.
-        musicData = Array.init(repeating: 0.0, count: 57)
+        musicData = Array.init(repeating: 0.0, count: 64)
     }
     
     // public function for starting processing of microphone data
@@ -86,7 +86,7 @@ class AudioModel {
     // Christian: Max Frequency implementation with vDSP_vswmax
     func getMaxFrequencyMagnitudeArray() -> Array<Float>{
         
-        let windowLength = vDSP_Length(fftData.count / 57)
+        let windowLength = vDSP_Length(fftData.count / 64)
         let outputCount = vDSP_Length(musicData.count)
         let stride = vDSP_Stride(1)
         vDSP_vswmax(fftData, stride, &musicData, stride, outputCount, windowLength)
