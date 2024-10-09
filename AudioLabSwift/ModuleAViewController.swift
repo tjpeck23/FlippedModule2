@@ -1,10 +1,11 @@
 //
-//  ViewController.swift
+//  ModuleAViewController.swift
 //  AudioLabSwift
 //
-//  Created by Eric Larson 
-//  Copyright © 2020 Eric Larson. All rights reserved.
+//  Created by Travis Peck on 10/8/24.
+//  Copyright © 2024 Eric Larson. All rights reserved.
 //
+
 
 import UIKit
 import Metal
@@ -15,7 +16,7 @@ let AUDIO_BUFFER_SIZE = 1024*4
 let MUSICAL_EQUALIZER_SIZE = 20
 
 
-class ViewController: UIViewController {
+class ModuleAViewController: UIViewController {
 
     
     let audio = AudioModel(buffer_size: AUDIO_BUFFER_SIZE)
