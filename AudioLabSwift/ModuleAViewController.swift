@@ -12,7 +12,7 @@ import Metal
 
 
 
-let AUDIO_BUFFER_SIZE = 1024*8 //comment
+let AUDIO_BUFFER_SIZE = 1024*16 //was 8
 
 
 let MUSICAL_EQUALIZER_SIZE = 64
@@ -46,7 +46,7 @@ class ModuleAViewController: UIViewController {
                         numPointsInGraph: MUSICAL_EQUALIZER_SIZE)
         
         // just start up the audio model here
-        audio.startMicrophoneProcessing(withFps: 10)
+        audio.startMicrophoneProcessing(withFps: 5)
         //audio.startProcesingAudioFileForPlayback()
         audio.startProcessingSinewaveForPlayback(withFreq: 630.0)
         audio.play()

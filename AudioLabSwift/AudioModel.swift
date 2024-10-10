@@ -85,10 +85,13 @@ class AudioModel {
     func getMaxFrequencyMagnitude() /*-> (Float,Float)*/{
         // this is the slow way of getting the maximum...
         // you might look into the Accelerate framework to make things more efficient
-        var max:Float = -1000.0
+        var sortedMusicData:[Float] = self.musicData.sorted(by: >)
+        var max1:Float = sortedMusicData[1]
+        var max2:Float = sortedMusicData.last!
         var maxi:Int = 0
+        var maxj:Int = 0
         
-        if inputBuffer != nil {
+       /* if inputBuffer != nil {
             for i in 0..<Int(self.musicData.count){
                 if(self.musicData[i]>max){
                     for j in 0..<Int(fftData.count){
@@ -100,10 +103,20 @@ class AudioModel {
                     }
                 }
             }
+        }*/
+        for i in 0..<Int(fftData.count){
+            if(fftData[i] == max1){
+                maxi = i
+                continue
+            }
+            else if(fftData[i] == max2){
+                maxj = i
+            }
         }
-        let frequency = Float(maxi) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)
-        //delete later
-        dump(frequency)
+        let frequencyi = Float(maxi) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)
+        let frequencyj = Float(maxi) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)        //delete later
+        dump(frequencyi)
+        dump(frequencyj)
         //need to edit to return 2 max frequencies
         //return (max,frequency)
     }
@@ -120,6 +133,30 @@ class AudioModel {
         vDSP_vswmax(fftData, stride, &musicData, stride, outputCount, windowLength)
         return musicData
     }
+    
+    
+    //func to get frequencies 50hz apart
+    //fingers crossed this is right
+    func findFrequenciesAtLeast50HzApart() -> [Float] {
+        // Convert fftData indices to frequencies
+        let frequencyResolution = Float(self.audioManager!.samplingRate) / Float(BUFFER_SIZE)
+        var frequencies: [Float] = []
+        
+        // Find peaks in fftData
+        let threshold: Float = -50.0
+        for (index, magnitude) in fftData.enumerated() {
+            if magnitude > threshold {
+                let frequency = Float(index) * frequencyResolution
+                // Check if this frequency is at least 50Hz apart from existing frequencies
+                if frequencies.allSatisfy({ abs($0 - frequency) >= 50.0 }) {
+                    frequencies.append(frequency)
+                }
+            }
+        }
+        return frequencies
+    }
+    
+    
     //==========================================
     // MARK: Private Properties
     private lazy var audioManager:Novocaine? = {
@@ -176,6 +213,10 @@ class AudioModel {
             
             // Will delete later
             getMaxFrequencyMagnitude()
+            
+            //get the frequencies 50hz apart
+            let detectedFrequencies = findFrequenciesAtLeast50HzApart()
+            print("Detected Frequencies: \(detectedFrequencies)") //this is for debugging to make sure its right. 
             
         }
     }
