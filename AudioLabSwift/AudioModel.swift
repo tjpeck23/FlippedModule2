@@ -105,7 +105,10 @@ class AudioModel {
             }
         }
         
-        return (self.fftData[maxi], self.fftData[maxj])
+        var freq1: Float = self.fftData[maxi]
+        var freq2: Float = self.fftData[maxj]
+        
+        return (freq1, freq2)
     }
     
     /*func getMaxFrequencyMagnitude() -> (Float,Float) {
@@ -222,7 +225,7 @@ class AudioModel {
             musicData = getMaxFrequencyMagnitudeArray()
             
             // Will delete later
-            getMaxFrequencyMagnitude()
+            getMaxFrequencyMagnitude2()
             
         }
     }

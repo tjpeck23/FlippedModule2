@@ -20,6 +20,9 @@ let MUSICAL_EQUALIZER_SIZE = 64
 
 class ModuleAViewController: UIViewController {
 
+    @IBOutlet weak var MaxFreq1: UILabel!
+    
+    @IBOutlet weak var MaxFreq2: UILabel!
     
     let audio = AudioModel(buffer_size: AUDIO_BUFFER_SIZE)
     lazy var graph:MetalGraph? = {
@@ -29,7 +32,6 @@ class ModuleAViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         // add in graphs for display
         graph?.addGraph(withName: "fft",
@@ -56,6 +58,12 @@ class ModuleAViewController: UIViewController {
             selector: #selector(self.updateGraph),
             userInfo: nil,
             repeats: true)
+        
+        Timer.scheduledTimer(timeInterval: 0.05,
+                             target: self,
+                             selector: #selector (self.updateFrequencies),
+                             userInfo: nil,
+                             repeats: true)
        
     }
     
@@ -84,7 +92,13 @@ class ModuleAViewController: UIViewController {
             forKey: "musical")
     }
     
+    @objc
+    func updateFrequencies(){
+        let (freq1, freq2) = audio.getMaxFrequencyMagnitude2()
+        print("Frequencies: \(freq1), \(freq2)")
+        MaxFreq1.text = "Frequency 1: \(freq1)"
+        MaxFreq2.text = "Frequency 2: \(freq2)"
+    }
     
-
 }
 
