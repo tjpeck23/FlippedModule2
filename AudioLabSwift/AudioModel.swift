@@ -108,6 +108,9 @@ class AudioModel {
         var freq1: Float = self.fftData[maxi]
         var freq2: Float = self.fftData[maxj]
         
+        freq1 = Float(maxi) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)
+        freq2 = Float(maxj) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)
+        
         return (freq1, freq2)
     }
     
