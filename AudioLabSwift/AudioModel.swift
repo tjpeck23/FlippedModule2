@@ -85,10 +85,13 @@ class AudioModel {
     func getMaxFrequencyMagnitude() /*-> (Float,Float)*/{
         // this is the slow way of getting the maximum...
         // you might look into the Accelerate framework to make things more efficient
-        var max:Float = -1000.0
+        var sortedMusicData:[Float] = self.musicData.sorted(by: >)
+        var max1:Float = sortedMusicData[1]
+        var max2:Float = sortedMusicData.last!
         var maxi:Int = 0
+        var maxj:Int = 0
         
-        if inputBuffer != nil {
+       /* if inputBuffer != nil {
             for i in 0..<Int(self.musicData.count){
                 if(self.musicData[i]>max){
                     for j in 0..<Int(fftData.count){
@@ -100,10 +103,20 @@ class AudioModel {
                     }
                 }
             }
+        }*/
+        for i in 0..<Int(fftData.count){
+            if(fftData[i] == max1){
+                maxi = i
+                continue
+            }
+            else if(fftData[i] == max2){
+                maxj = i
+            }
         }
-        let frequency = Float(maxi) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)
-        //delete later
-        dump(frequency)
+        let frequencyi = Float(maxi) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)
+        let frequencyj = Float(maxi) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)        //delete later
+        dump(frequencyi)
+        dump(frequencyj)
         //need to edit to return 2 max frequencies
         //return (max,frequency)
     }
