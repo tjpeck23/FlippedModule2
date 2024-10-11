@@ -50,7 +50,7 @@ class ModuleAViewController: UIViewController {
         // just start up the audio model here
         audio.startMicrophoneProcessing(withFps: 5)
         //audio.startProcesingAudioFileForPlayback()
-        audio.startProcessingSinewaveForPlayback(withFreq: 630.0)
+        //audio.startProcessingSinewaveForPlayback(withFreq: 630.0)
         audio.play()
         
         // run the loop for updating the graph peridocially
