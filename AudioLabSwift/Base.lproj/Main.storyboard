@@ -61,9 +61,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ama-XB-P4w">
-                                <rect key="frame" x="159" y="244" width="97" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ama-XB-P4w">
+                                <rect key="frame" x="158.5" y="292" width="97" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Module A"/>
                                 <connections>
@@ -71,9 +70,24 @@
                                     <segue destination="RJZ-Li-xJO" kind="show" id="gam-6l-e9k"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d4f-Da-rNx">
+                                <rect key="frame" x="159" y="627" width="96" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Module B"/>
+                                <connections>
+                                    <action selector="ModuleBButton:" destination="BkU-9l-gvA" eventType="touchUpInside" id="jEj-Ka-NRK"/>
+                                    <segue destination="MRy-Ze-Gru" kind="show" id="gUx-Bl-MLo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="RwH-Qp-haZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="RwH-Qp-haZ" firstAttribute="bottom" secondItem="d4f-Da-rNx" secondAttribute="bottom" constant="200" id="aQx-zt-GeI"/>
+                            <constraint firstItem="d4f-Da-rNx" firstAttribute="centerX" secondItem="RwH-Qp-haZ" secondAttribute="centerX" id="aw2-Uo-D9J"/>
+                            <constraint firstItem="Ama-XB-P4w" firstAttribute="top" secondItem="RwH-Qp-haZ" secondAttribute="top" constant="200" id="fq7-cw-T3q"/>
+                            <constraint firstItem="Ama-XB-P4w" firstAttribute="centerX" secondItem="RwH-Qp-haZ" secondAttribute="centerX" id="msb-dU-9FU"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="45Z-bv-ubf"/>
                 </viewController>
@@ -98,6 +112,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Vn-wG-5mS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1655.072463768116" y="1036.6071428571429"/>
+        </scene>
+        <!--ModuleB View Controller-->
+        <scene sceneID="fsI-G0-d6d">
+            <objects>
+                <viewController id="MRy-Ze-Gru" customClass="ModuleBViewController" customModule="AudioLabSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="syn-hs-546">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="bWj-TN-Kse"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Eae-1H-I44"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xWX-h3-XDm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="167" y="1765"/>
         </scene>
     </scenes>
     <resources>

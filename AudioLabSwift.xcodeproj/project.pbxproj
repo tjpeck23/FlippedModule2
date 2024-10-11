@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D628C102CB8C02200B7D568 /* ModuleBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D628C0F2CB8C02200B7D568 /* ModuleBViewController.swift */; };
 		495C59412CB6289200DC24B9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495C59402CB6289200DC24B9 /* MainViewController.swift */; };
 		495C59432CB629BE00DC24B9 /* ModuleAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495C59422CB629BE00DC24B9 /* ModuleAViewController.swift */; };
 		B65B5A5A24F4409F00E74E73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B5A5924F4409F00E74E73 /* AppDelegate.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D628C0F2CB8C02200B7D568 /* ModuleBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBViewController.swift; sourceTree = "<group>"; };
 		495C59402CB6289200DC24B9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		495C59422CB629BE00DC24B9 /* ModuleAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleAViewController.swift; sourceTree = "<group>"; };
 		B65B5A5624F4409F00E74E73 /* AudioLabSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioLabSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +97,7 @@
 				B65B5A8024F4AAB800E74E73 /* MetalGraph.swift */,
 				B65B5A7924F4523C00E74E73 /* AudioModel.swift */,
 				B65B5A5F24F4409F00E74E73 /* Main.storyboard */,
+				1D628C0F2CB8C02200B7D568 /* ModuleBViewController.swift */,
 				B65B5A6224F440A100E74E73 /* Assets.xcassets */,
 				B65B5A6424F440A100E74E73 /* LaunchScreen.storyboard */,
 				B65B5A6724F440A100E74E73 /* Info.plist */,
@@ -178,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B65B5A7A24F4523C00E74E73 /* AudioModel.swift in Sources */,
+				1D628C102CB8C02200B7D568 /* ModuleBViewController.swift in Sources */,
 				495C59432CB629BE00DC24B9 /* ModuleAViewController.swift in Sources */,
 				B65B5A7824F444CE00E74E73 /* CircularBuffer.m in Sources */,
 				B65B5A7324F443A400E74E73 /* AudioFileReader.m in Sources */,
