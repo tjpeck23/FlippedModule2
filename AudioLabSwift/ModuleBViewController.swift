@@ -1,14 +1,14 @@
 //
-//  MainViewController.swift
+//  ModuleBViewController.swift
 //  AudioLabSwift
 //
-//  Created by Travis Peck on 10/8/24.
+//  Created by Christian Melendez on 10/10/24.
 //  Copyright © 2024 Eric Larson. All rights reserved.
 //
 
 import UIKit
 
-class MainViewController: UIViewController {
+class ModuleBViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,11 +17,6 @@ class MainViewController: UIViewController {
     }
     
 
-    @IBAction func ModuleAButton(_ sender: Any) {
-    }
-    
-    @IBAction func ModuleBButton(_ sender: Any) {
-    }
     /*
     // MARK: - Navigation
 
