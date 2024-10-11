@@ -84,12 +84,12 @@ class AudioModel {
     
     func getMaxFrequencyMagnitude2() -> (Float,Float) {
         
-        var max1: Float = 0.0
-        var max2: Float = 0.0
-        var maxi: Int = 0
-        var maxj: Int = 0
+        var max1: Float = -1000.0
+        var max2: Float = -1000.0
+        var max1Index: Int = 0
+        var max2Index: Int = 0
         
-        if inputBuffer != nil {
+        /*if inputBuffer != nil {
             for i in 0..<Int(self.musicData.count){
                 if(self.musicData[i] > max1){
                     max1 = self.musicData[i]
@@ -103,14 +103,33 @@ class AudioModel {
                     maxj = j
                 }
             }
+        }*/
+        
+        if inputBuffer != nil {
+            //Find the 2 hills. If the values start going down then check the previous value to see if it's a max.
+            for i in 0..<Int(self.musicData.count - 1){
+                if(self.musicData[i + 1] < self.musicData[i] && self.musicData[i] > max2) {
+                    if (self.musicData[i] > max1) {
+                        max2 = max1
+                        max1 = self.musicData[i]
+                        continue
+                    }
+                    else{
+                        max2 = self.musicData[i]
+                    }
+                }
+            }
+            //Grab the indices from the fftData array to find the frequencies.
+            max1Index = fftData.firstIndex(of: max1) ?? 0
+            max2Index = fftData.firstIndex(of: max2) ?? 0
         }
         
-        var freq1: Float = self.fftData[maxi]
-        var freq2: Float = self.fftData[maxj]
+        var freq1: Float = 0.0
+        var freq2: Float = 0.0
         
-        freq1 = Float(maxi) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)
-        freq2 = Float(maxj) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)
-        dump(self.musicData)
+        freq1 = Float(max1Index) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)
+        freq2 = Float(max2Index) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)
+        //dump(self.musicData)
         
         return (freq1, freq2)
     }
