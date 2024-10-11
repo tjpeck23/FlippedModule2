@@ -7,16 +7,82 @@
 //
 
 import UIKit
+import Metal
+
+
+
+let AUDIO_BUFFER_SIZEB = 1024*16
+
 
 class ModuleBViewController: UIViewController {
-
+    
+    let audio = AudioModel(buffer_size: AUDIO_BUFFER_SIZE)
+    lazy var graph:MetalGraph? = {
+        return MetalGraph(mainView: self.view)
+    }()
+    
+    
+    @IBOutlet weak var frequencySlider: UISlider!
+    
+    @IBOutlet weak var sliderLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       /* // add in graphs for display
+        graph?.addGraph(withName: "fft",
+                        shouldNormalize: true,
+                        numPointsInGraph: AUDIO_BUFFER_SIZE/2)
+        
+        graph?.addGraph(withName: "fftZoomed",
+                        shouldNormalize: true,
+                        numPointsInGraph: AUDIO_BUFFER_SIZE/2)*/
+        
+        sliderLabel.text = String(frequencySlider.value)
+        audio.startMicrophoneProcessing(withFps: 5)
+        audio.startProcessingSinewaveForPlayback(withFreq: frequencySlider.value)
+        audio.play()
+        let (startIdx, endIdx) = audio.getFrequencyIndices(startDb: 16500, endDb: 20500)
+        
+        // add in graphs for display
+        graph?.addGraph(withName: "fft",
+                        shouldNormalize: true,
+                        numPointsInGraph: AUDIO_BUFFER_SIZE/2)
+        
+        graph?.addGraph(withName: "fftZoomed",
+                        shouldNormalize: true,
+                        numPointsInGraph: endIdx - startIdx)
 
-        // Do any additional setup after loading the view.
+        // run the loop for updating the graph peridocially
+        Timer.scheduledTimer(timeInterval: 0.05, target: self,
+            selector: #selector(self.updateGraph),
+            userInfo: nil,
+            repeats: true)
     }
     
-
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        audio.pause()
+    }
+    
+    @IBAction func updateFrequencyViaSlider(_ sender: Any) {
+        sliderLabel.text = String(frequencySlider.value)
+    }
+    
+    @objc
+    func updateGraph(){
+        self.graph?.updateGraph(
+            data: self.audio.fftData,
+            forKey: "fft"
+        )
+        //zoomed graph calculations
+        let (startIdx, endIdx) = audio.getFrequencyIndices(startDb: 16500, endDb: 20500)
+        let subArray:[Float] = Array(self.audio.fftData[startIdx...endIdx])
+        self.graph?.updateGraph(
+            data: subArray,
+            forKey: "fftZoomed")
+    }
     /*
     // MARK: - Navigation
 

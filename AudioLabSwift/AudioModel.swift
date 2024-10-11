@@ -308,6 +308,16 @@ class AudioModel {
             return (largestFreq1, largestFreq2)
         }
    
+    func getFrequencyIndices(startDb:Float, endDb: Float) -> (Int, Int) {
+        var startIdx: Int = 0
+        var endIdx: Int = 0
+        
+        startIdx = Int(startDb * Float(self.BUFFER_SIZE) / Float(self.audioManager!.samplingRate))
+        endIdx = Int(endDb * Float(self.BUFFER_SIZE) / Float(self.audioManager!.samplingRate))
+        
+        
+        return(startIdx, endIdx)
+    }
     
     //==========================================
     // MARK: Audiocard Callbacks

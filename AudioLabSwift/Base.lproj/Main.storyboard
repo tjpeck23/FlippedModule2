@@ -120,14 +120,39 @@
                     <view key="view" contentMode="scaleToFill" id="syn-hs-546">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5i-Bf-2gJ">
+                                <rect key="frame" x="186" y="439" width="42" height="45"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="17000" minValue="17000" maxValue="20000" translatesAutoresizingMaskIntoConstraints="NO" id="D2b-Jl-kIV">
+                                <rect key="frame" x="23" y="832" width="368" height="31"/>
+                                <connections>
+                                    <action selector="updateFrequencyViaSlider:" destination="MRy-Ze-Gru" eventType="valueChanged" id="RHk-Wn-EiV"/>
+                                </connections>
+                            </slider>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="bWj-TN-Kse"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="bWj-TN-Kse" firstAttribute="bottom" secondItem="D2b-Jl-kIV" secondAttribute="bottom" constant="1" id="6bb-QN-obD"/>
+                            <constraint firstItem="bWj-TN-Kse" firstAttribute="trailing" secondItem="D2b-Jl-kIV" secondAttribute="trailing" constant="25" id="6q6-Jj-4GD"/>
+                            <constraint firstItem="n5i-Bf-2gJ" firstAttribute="centerX" secondItem="bWj-TN-Kse" secondAttribute="centerX" id="STo-xV-t5U"/>
+                            <constraint firstItem="D2b-Jl-kIV" firstAttribute="leading" secondItem="bWj-TN-Kse" secondAttribute="leading" constant="25" id="cW6-xQ-IFw"/>
+                            <constraint firstItem="n5i-Bf-2gJ" firstAttribute="centerY" secondItem="bWj-TN-Kse" secondAttribute="centerY" id="iB3-ya-Zkd"/>
+                            <constraint firstItem="D2b-Jl-kIV" firstAttribute="centerX" secondItem="bWj-TN-Kse" secondAttribute="centerX" id="z6E-Du-dyg"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Eae-1H-I44"/>
+                    <connections>
+                        <outlet property="frequencySlider" destination="D2b-Jl-kIV" id="Gpj-ur-kOD"/>
+                        <outlet property="sliderLabel" destination="n5i-Bf-2gJ" id="hMn-mm-dlL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xWX-h3-XDm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="167" y="1765"/>
+            <point key="canvasLocation" x="166.66666666666669" y="1764.5089285714284"/>
         </scene>
     </scenes>
     <resources>
