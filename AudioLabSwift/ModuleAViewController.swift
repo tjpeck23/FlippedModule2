@@ -15,7 +15,7 @@ import Metal
 let AUDIO_BUFFER_SIZE = 1024*16 //was 8
 
 
-let MUSICAL_EQUALIZER_SIZE = 64
+let MUSICAL_EQUALIZER_SIZE = 8065
 
 
 class ModuleAViewController: UIViewController {
@@ -118,14 +118,14 @@ class ModuleAViewController: UIViewController {
                 }
     }
     
-    //I used google to find the frequencies that ooh as in like boo or Ahh like father normally are and put then into these funcs.
+    //I used google to find the frequencies that ooh as in like boo or Ahh like father normally are and put then into these funcs but honeslty it was eaisr to just yell into computer myself and see what frequencys i got for ooh or aahh
     
     func isOoooo(f1: Float, f2: Float) -> Bool {
-        return (f1 >= 250 && f1 <= 450) && (f2 >= 700 && f2 <= 1100)
+        return (f1 >= 50 && f1 <= 200) && (f2 >= 100 && f2 <= 250)
         }
 
     func isAhhhh(f1: Float, f2: Float) -> Bool {
-        return (f1 >= 500 && f1 <= 900) && (f2 >= 1000 && f2 <= 1600)
+        return (f1 >= 250 && f1 <= 900) && (f2 >= 400 && f2 <= 1600)
         }
     
 }
