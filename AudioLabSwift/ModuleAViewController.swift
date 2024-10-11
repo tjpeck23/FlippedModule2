@@ -24,10 +24,13 @@ class ModuleAViewController: UIViewController {
     
     @IBOutlet weak var MaxFreq2: UILabel!
     
+    @IBOutlet weak var OOHOrAAHH: UILabel!
+    
     let audio = AudioModel(buffer_size: AUDIO_BUFFER_SIZE)
     lazy var graph:MetalGraph? = {
         return MetalGraph(mainView: self.view)
     }()
+    
     
     
     override func viewDidLoad() {
@@ -90,6 +93,8 @@ class ModuleAViewController: UIViewController {
         self.graph?.updateGraph(
             data: self.audio.musicData,
             forKey: "musical")
+        
+        detectOOHorAAHHSound()
     }
     
     @objc
@@ -99,6 +104,29 @@ class ModuleAViewController: UIViewController {
         MaxFreq1.text = "Frequency 1: \(freq1)"
         MaxFreq2.text = "Frequency 2: \(freq2)"
     }
+    
+    func detectOOHorAAHHSound(){
+        let (freq1, freq2) = audio.getTwoLargestFrequencies()
+                
+                // Classify the sound based on frequency ranges
+                if isOoooo(f1: freq1, f2: freq2) {
+                    OOHOrAAHH.text = "ooooo"
+                } else if isAhhhh(f1: freq1, f2: freq2) {
+                    OOHOrAAHH.text = "ahhhh"
+                } else {
+                    OOHOrAAHH.text = "Unknown Sound"
+                }
+    }
+    
+    //I used google to find the frequencies that ooh as in like boo or Ahh like father normally are and put then into these funcs.
+    
+    func isOoooo(f1: Float, f2: Float) -> Bool {
+        return (f1 >= 250 && f1 <= 450) && (f2 >= 700 && f2 <= 1100)
+        }
+
+    func isAhhhh(f1: Float, f2: Float) -> Bool {
+        return (f1 >= 500 && f1 <= 900) && (f2 >= 1000 && f2 <= 1600)
+        }
     
 }
 

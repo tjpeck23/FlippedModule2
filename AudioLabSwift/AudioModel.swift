@@ -281,6 +281,32 @@ class AudioModel {
         }
     }
     
+    
+    //this func is to help determine between ooh and ahhh
+    func getTwoLargestFrequencies() -> (Float, Float) {
+            // Sort the fftData by magnitude to get the two largest peaks
+            let frequencyResolution = Float(self.audioManager!.samplingRate) / Float(BUFFER_SIZE)
+            
+            // Find the two largest magnitudes and their corresponding frequencies
+            var largestFreq1: Float = 0.0
+            var largestFreq2: Float = 0.0
+            var max1: Float = -Float.infinity
+            var max2: Float = -Float.infinity
+            
+            for (index, magnitude) in fftData.enumerated() {
+                if magnitude > max1 {
+                    max2 = max1
+                    max1 = magnitude
+                    largestFreq2 = largestFreq1
+                    largestFreq1 = Float(index) * frequencyResolution
+                } else if magnitude > max2 {
+                    max2 = magnitude
+                    largestFreq2 = Float(index) * frequencyResolution
+                }
+            }
+            
+            return (largestFreq1, largestFreq2)
+        }
    
     
     //==========================================

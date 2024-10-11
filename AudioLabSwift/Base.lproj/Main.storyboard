@@ -31,6 +31,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2TX-CY-crp">
+                                <rect key="frame" x="94" y="724" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="azK-iq-Quy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -39,6 +46,7 @@
                     <connections>
                         <outlet property="MaxFreq1" destination="f1i-5q-2XH" id="uJO-ep-Oeb"/>
                         <outlet property="MaxFreq2" destination="e76-bd-jMY" id="Hmd-3V-s30"/>
+                        <outlet property="OOHOrAAHH" destination="2TX-CY-crp" id="NkY-Tt-qtv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r5l-tL-oiy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
