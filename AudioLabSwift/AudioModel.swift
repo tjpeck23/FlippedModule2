@@ -276,7 +276,7 @@ class AudioModel {
             
             //get the frequencies 50hz apart
             let detectedFrequencies = findFrequenciesAtLeast50HzApart()
-            print("Detected Frequencies: \(detectedFrequencies)") //this is for debugging to make sure its right. 
+            print("Detected Frequencies: \(detectedFrequencies)") //this is for debugging to make sure its right.
             
         }
     }
