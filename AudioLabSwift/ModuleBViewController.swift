@@ -47,7 +47,7 @@ class ModuleBViewController: UIViewController {
             userInfo: nil,
             repeats: true)
         
-        Timer.scheduledTimer(timeInterval: 1, target: self,
+        Timer.scheduledTimer(timeInterval: 0.5, target: self,
             selector: #selector(self.checkDopplerEffect),
             userInfo: nil,
             repeats: true)
