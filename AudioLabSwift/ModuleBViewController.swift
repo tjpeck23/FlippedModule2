@@ -29,15 +29,6 @@ class ModuleBViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       /* // add in graphs for display
-        graph?.addGraph(withName: "fft",
-                        shouldNormalize: true,
-                        numPointsInGraph: AUDIO_BUFFER_SIZE/2)
-        
-        graph?.addGraph(withName: "fftZoomed",
-                        shouldNormalize: true,
-                        numPointsInGraph: AUDIO_BUFFER_SIZE/2)*/
-        
         sliderLabel.text = String(frequencySlider.value)
         audio.startMicrophoneProcessing(withFps: 5)
         audio.startProcessingSinewaveForPlayback(withFreq: frequencySlider.value)

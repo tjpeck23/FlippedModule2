@@ -63,24 +63,6 @@ class AudioModel {
         self.audioManager?.pause()
     }
     
-    // Here is an example function for getting the maximum frequency
-    /*func getMaxFrequencyMagnitude() -> (Float,Float){
-        // this is the slow way of getting the maximum...
-        // you might look into the Accelerate framework to make things more efficient
-        var max:Float = -1000.0
-        var maxi:Int = 0
-        
-        if inputBuffer != nil {
-            for i in 0..<Int(fftData.count){
-                if(fftData[i]>max){
-                    max = fftData[i]
-                    maxi = i
-                }
-            }
-        }
-        let frequency = Float(maxi) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)
-        return (max,frequency)
-    }*/
     
     func getMaxFrequencyMagnitude2() -> (Float,Float) {
         
@@ -89,33 +71,21 @@ class AudioModel {
         var max1Index: Int = 0
         var max2Index: Int = 0
         
-        /*if inputBuffer != nil {
-            for i in 0..<Int(self.musicData.count){
-                if(self.musicData[i] > max1){
-                    max1 = self.musicData[i]
-                    maxi = i
-                }
-            }
-            
-            for j in 0..<Int(self.musicData.count){
-                if(self.musicData[j] > max2) && (j != maxi) {
-                    max2 = self.musicData[j]
-                    maxj = j
-                }
-            }
-        }*/
         
         if inputBuffer != nil {
             //Find the 2 hills. If the values start going down then check the previous value to see if it's a max.
             for i in 0..<Int(self.musicData.count - 1){
                 if(self.musicData[i + 1] < self.musicData[i] && self.musicData[i] > max2) {
-                    if (self.musicData[i] > max1) {
-                        max2 = max1
-                        max1 = self.musicData[i]
-                        continue
-                    }
-                    else{
-                        max2 = self.musicData[i]
+                    if(i != 1 && self.musicData[i] >= self.musicData[i - 1]){
+                        
+                        if (self.musicData[i] > max1) {
+                            max2 = max1
+                            max1 = self.musicData[i]
+                            continue
+                        }
+                        else{
+                            max2 = self.musicData[i]
+                        }
                     }
                 }
             }
@@ -134,55 +104,7 @@ class AudioModel {
         return (freq1, freq2)
     }
     
-    /*func getMaxFrequencyMagnitude() -> (Float,Float) {
-        // this is the slow way of getting the maximum...
-        // you might look into the Accelerate framework to make things more efficient
-        var sortedMusicData:[Float] = self.musicData.sorted(by: >)
-        var max1:Float = sortedMusicData[1]
-        var max2:Float = sortedMusicData.last!
-        var maxi:Int = 0
-        var maxj:Int = 0
-        var max:Float = -1000.0
-        
-        if inputBuffer != nil {
-            for i in 0..<Int(self.musicData.count){
-                if(self.musicData[i]>max){
-                    for j in 0..<Int(fftData.count){
-                        // wouldn't this equate the fft value to the magnitude value?
-                        if(fftData[j] == self.musicData[i]){
-                            max = fftData[j]
-                            maxi = j
-                            break
-                        }
-                    }
-                }
-            }
-        }
-        
-        
-        for i in 0..<Int(fftData.count){
-            if(fftData[i] == max1){
-                maxi = i
-                continue
-            }
-            else if(fftData[i] == max2){
-                maxj = i
-            }
-        }
-        /*let frequencyi
-         = Float(maxi) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)
-        let frequencyj = Float(maxi) / Float(BUFFER_SIZE) * Float(self.audioManager!.samplingRate)        //delete later
-        dump(frequencyi)
-        dump(frequencyj)
-        */
-        
-        
-        //need to edit to return 2 max frequencies
-        return (max, frequency)
-    }
-    */
-    
-    // for sliding max windows, you might be interested in the following: vDSP_vswmax
+
     
     // Christian: Max Frequency implementation with vDSP_vswmax
     func getMaxFrequencyMagnitudeArray() -> Array<Float>{
@@ -270,9 +192,6 @@ class AudioModel {
             
             // Christian: Update the musical one
             musicData = getMaxFrequencyMagnitudeArray()
-            
-            // Will delete later
-            getMaxFrequencyMagnitude2()
             
             //get the frequencies 50hz apart
             let detectedFrequencies = findFrequenciesAtLeast50HzApart()
