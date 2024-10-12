@@ -20,11 +20,14 @@ class ModuleBViewController: UIViewController {
     lazy var graph:MetalGraph? = {
         return MetalGraph(mainView: self.view)
     }()
+    var previousFrequency: Float?
     
     
     @IBOutlet weak var frequencySlider: UISlider!
     
     @IBOutlet weak var sliderLabel: UILabel!
+    
+    @IBOutlet weak var GestureLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +50,11 @@ class ModuleBViewController: UIViewController {
         // run the loop for updating the graph peridocially
         Timer.scheduledTimer(timeInterval: 0.05, target: self,
             selector: #selector(self.updateGraph),
+            userInfo: nil,
+            repeats: true)
+        
+        Timer.scheduledTimer(timeInterval: 0.5, target: self,
+            selector: #selector(self.checkDopplerEffect),
             userInfo: nil,
             repeats: true)
     }
@@ -73,6 +81,26 @@ class ModuleBViewController: UIViewController {
         self.graph?.updateGraph(
             data: subArray,
             forKey: "fftZoomed")
+    }
+    
+    @objc
+    func checkDopplerEffect() {
+        let (currentFrequency, _) = audio.getMaxFrequencyMagnitude2()
+        
+        var status = "Not gesturing"
+        
+        if let previous = previousFrequency {
+            if currentFrequency < previous {
+                status = "Gesturing towards"
+            } else if currentFrequency > previous {
+                status = "Gesturing away"
+            }
+        }
+        previousFrequency = currentFrequency
+        
+        DispatchQueue.main.async {
+            self.GestureLabel.text = status
+        }
     }
     /*
     // MARK: - Navigation

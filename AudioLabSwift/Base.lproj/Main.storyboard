@@ -133,6 +133,13 @@
                                     <action selector="updateFrequencyViaSlider:" destination="MRy-Ze-Gru" eventType="valueChanged" id="RHk-Wn-EiV"/>
                                 </connections>
                             </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Waiting for data..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mwb-T5-58I">
+                                <rect key="frame" x="119" y="228" width="194" height="77"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bWj-TN-Kse"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -146,6 +153,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="GestureLabel" destination="Mwb-T5-58I" id="NV2-98-x2x"/>
                         <outlet property="frequencySlider" destination="D2b-Jl-kIV" id="Gpj-ur-kOD"/>
                         <outlet property="sliderLabel" destination="n5i-Bf-2gJ" id="hMn-mm-dlL"/>
                     </connections>
